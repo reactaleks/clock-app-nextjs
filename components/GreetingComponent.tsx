@@ -3,8 +3,7 @@ interface PropTypes {
 }
 
 export default function GreetingComponent({ time }: PropTypes) {
-  // const currentHour = parseInt(time.split(':')[0])
-  const currentHour = parseInt("7");
+  const currentHour = parseInt(time.split(':')[0])
   let greeting = "";
 
 
@@ -20,9 +19,9 @@ export default function GreetingComponent({ time }: PropTypes) {
 
 
   return (
-    <>
+    <div className="text-white">
         {currentHour >= 5 && currentHour < 17 ? 'moon' : 'sun'} 
       Good {greeting}
-    </>
+    </div>
   );
 }

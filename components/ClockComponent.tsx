@@ -4,6 +4,7 @@ import LocationComponent from "./LocationComponent";
 import ButtonComponent from "./ButtonComponent";
 import QuoteComponent from "./QuoteComponent";
 import InformationComponent from "./InformationComponent";
+import BackgroundImageComponent from "./BackgroudImageComponent";
 
 // Get user ip address using ipapi
 const fetchUserLocation = async () => {
@@ -12,10 +13,9 @@ const fetchUserLocation = async () => {
 };
 // Get user time using worldtimeapi
 const fetchUserTime = async (timezone: string) => {
-  const res = await fetch(`http://worldtimeapi.org/api/timezone/` + timezone);
+  const res = await fetch((`http://worldtimeapi.org/api/timezone/` + timezone), {cache: 'no-store'});
   return res.json();
 };
-
 
 export default async function ClockComponent() {
   const data = await fetchUserLocation();
@@ -28,8 +28,10 @@ export default async function ClockComponent() {
     hour: "numeric",
     minute: "2-digit",
   });
+  console.log(currentUserDateTime)
   return (
-    <>
+    <div className="relative text-white bg-black h-screen bg-opacity-50">
+        <BackgroundImageComponent currentTime={currentUserTime}/>
         <QuoteComponent/>
         <GreetingComponent time={currentUserTime}/>
         <TimeComponent currentTime={currentUserTime}/>
@@ -37,6 +39,6 @@ export default async function ClockComponent() {
         <ButtonComponent/>
         <InformationComponent timezone={currentUserDateTime.timezone} yearday={currentUserDateTime.day_of_year} weekday={currentUserDateTime.day_of_week} weeknumber={currentUserDateTime.week_number}/>
 
-    </>
+    </div>
   );
 }
