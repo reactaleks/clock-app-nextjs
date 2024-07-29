@@ -7,6 +7,7 @@ export default function QuoteComponent() {
 
   const getData = async () => {
     const quoteData = await fetchProgrammingQuote();
+    setLoading(false)
     return setData(quoteData);
   };
 
@@ -14,19 +15,18 @@ export default function QuoteComponent() {
     getData();
   }, []);
 
-  console.log(data);
   return (
     <div
       className="text-[12px] leading-[22px]
-        col-span-10 col-start-2 row-span-5 row-start-2 
+        col-span-10 col-start-2 row-span-8 row-start-2 
         flex justify-between
         "
     >
       <div className="flex flex-col max-w-[90%]
-      text-[12px] leading-[22px]
+      text-[12px] leading-[22px] tracking-[0px]
       ">
-        <div className="font-normal">&quot;{ data!.quote }&quot;</div>
-        <div className="font-bold mt-2">{ data!.author}</div>
+        <div className="font-normal">&quot;{loading ? ' ': data!.quote }&quot;</div>
+        <div className="font-bold mt-2">{loading ? ' ': data!.author }</div>
       </div>
       <div>
         <button className="cursor-pointer" onClick={getData}>

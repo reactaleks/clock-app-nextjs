@@ -29,15 +29,21 @@ export default async function ClockComponent() {
     minute: "2-digit",
   });
   return (
-    <div className="relative text-white bg-black h-screen bg-opacity-50 grid grid-cols-12 grid-rows-12">
+    <div className="relative ">
+       <div className="relative text-white bg-black h-screen bg-opacity-50 grid grid-cols-12 grid-rows-24">
         <BackgroundImageComponent currentTime={currentUserTime}/> 
         <QuoteComponent/>
         <GreetingComponent time={currentUserTime}/>
         <TimeComponent currentTime={currentUserTime}/>
         <LocationComponent city={data.city} country={data.country_code}/>
         <ButtonComponent/>
-        {/* <InformationComponent timezone={currentUserDateTime.timezone} yearday={currentUserDateTime.day_of_year} weekday={currentUserDateTime.day_of_week} weeknumber={currentUserDateTime.week_number}/> */}
 
+      </div>
+      {/* <div className="text-white absolute bottom-0">
+        <InformationComponent timezone={currentUserDateTime.timezone} yearday={currentUserDateTime.day_of_year} weekday={currentUserDateTime.day_of_week} weeknumber={currentUserDateTime.week_number}/>
+
+      </div> */}
     </div>
+   
   );
 }

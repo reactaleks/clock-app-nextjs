@@ -19,7 +19,7 @@ export default function GreetingComponent({ time }: PropTypes) {
   return (
     <div className="text-white text-[15px] leading-[25px] tracking-[3px] 
     flex justify-between items-center
-    col-span-7 row-span-1 row-start-7 col-start-2 uppercase">
+    col-span-7 row-span-1 row-start-12 col-start-2 uppercase">
       {currentHour >= 5 && currentHour < 17 ? (
         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
         <path
