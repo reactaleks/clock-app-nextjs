@@ -4,7 +4,6 @@ interface PropTypes {
 }
 export default function BackgroundImageComponent({currentTime}:PropTypes) {
     const timeofDay = parseInt(currentTime.split(':')[0])
-    console.log(timeofDay)
     if(timeofDay >= 5 && timeofDay < 21) {
         return (
             <Image src={'/assets/desktop/bg-image-daytime.jpg'} width={1440} height={800} alt="" style={{objectFit: 'cover'}} className="absolute h-screen -z-10"/>

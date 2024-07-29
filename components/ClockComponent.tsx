@@ -13,7 +13,7 @@ const fetchUserLocation = async () => {
 };
 // Get user time using worldtimeapi
 const fetchUserTime = async (timezone: string) => {
-  const res = await fetch((`http://worldtimeapi.org/api/timezone/` + timezone), {cache: 'no-store'});
+  const res = await fetch((`http://worldtimeapi.org/api/timezone/` + timezone), {next: { revalidate: 60 }});
   return res.json();
 };
 
@@ -28,16 +28,15 @@ export default async function ClockComponent() {
     hour: "numeric",
     minute: "2-digit",
   });
-  console.log(currentUserDateTime)
   return (
-    <div className="relative text-white bg-black h-screen bg-opacity-50">
-        <BackgroundImageComponent currentTime={currentUserTime}/>
+    <div className="relative text-white bg-black h-screen bg-opacity-50 grid grid-cols-12 grid-rows-12">
+        <BackgroundImageComponent currentTime={currentUserTime}/> 
         <QuoteComponent/>
         <GreetingComponent time={currentUserTime}/>
         <TimeComponent currentTime={currentUserTime}/>
         <LocationComponent city={data.city} country={data.country_code}/>
         <ButtonComponent/>
-        <InformationComponent timezone={currentUserDateTime.timezone} yearday={currentUserDateTime.day_of_year} weekday={currentUserDateTime.day_of_week} weeknumber={currentUserDateTime.week_number}/>
+        {/* <InformationComponent timezone={currentUserDateTime.timezone} yearday={currentUserDateTime.day_of_year} weekday={currentUserDateTime.day_of_week} weeknumber={currentUserDateTime.week_number}/> */}
 
     </div>
   );
