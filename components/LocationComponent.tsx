@@ -11,13 +11,13 @@ export default function LocationComponent({
   return (
     <div
       className={`uppercase font-bold text-[15px] md:text-[18px] xl:text-[24px] leading-[28px] tracking-[3px] md:tracking-[3.6px] xl:tracking-[4.8px]
-        flex items-center xl:col-start-3
+        flex items-center justify-start xl:col-start-3
         ${
           isExpanded
-            ? "row-start-18 md:row-start-17 xl:row-start-20"
-            : "row-start-19 md:row-start-20 xl:row-start-22"
+            ? "row-start-15 md:row-start-15  xl:row-start-20"
+            : "row-start-18 md:row-start-19 xl:row-start-22"
         }
-        col-span-6 col-start-2 row-span-1 row-start-19
+        col-span-6 col-start-2 row-span-2 md:row-span-1
         
         `}
     >

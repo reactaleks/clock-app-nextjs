@@ -1,16 +1,25 @@
-import Image from "next/image"
+import Image from "next/image";
 interface PropTypes {
-    currentTime:string
+  isDayTime: boolean;
 }
-export default function BackgroundImageComponent({currentTime}:PropTypes) {
-    const timeofDay = parseInt(currentTime.split(':')[0])
-    if(timeofDay >= 5 && timeofDay < 17) {
-        return (
-            <Image src={'/assets/desktop/bg-image-daytime.jpg'} width={1440} height={800} alt="" style={{objectFit: 'cover'}} className="absolute h-screen w-screen -z-10"/>
-        )
-    } else {
-        return (
-            <Image src={'/assets/desktop/bg-image-nighttime.jpg'} width={1440} height={800} alt="" style={{objectFit: 'cover'}} className="absolute h-screen w-screen -z-10"/>
-        )
-    }
+export default function BackgroundImageComponent({ isDayTime }: PropTypes) {
+  if(isDayTime) {
+    return <Image
+      src={"/assets/desktop/bg-image-daytime.jpg"}
+      width={1440}
+      height={800}
+      alt=""
+      style={{ objectFit: "cover" }}
+      className="absolute h-screen w-screen -z-10"
+    />
+  } else {
+    return <Image
+    src={"/assets/desktop/bg-image-nighttime.jpg"}
+    width={1440}
+    height={800}
+    alt=""
+    style={{ objectFit: "cover" }}
+    className="absolute h-screen w-screen -z-10"
+  />
+  }
 }

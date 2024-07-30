@@ -23,11 +23,15 @@ export default function GreetingComponent({ time, isExpanded }: PropTypes) {
         md:text-[18px] xl:text-[20px] xl:leading-[28px] xl:tracking-[4px]
     flex justify-between items-center
 
-    ${isExpanded ? "row-start-8  xl:row-start-7" : "row-start-14 md:row-start-15 xl:row-start-15"}
+    ${
+      isExpanded
+        ? "row-start-8 md:row-start-6 xl:row-start-6"
+        : "row-start-14 md:row-start-13 xl:row-start-15"
+    }
 
-    col-span-6  row-span-1  col-start-2
-    md:col-span-7 md:col-start-2 md:justify-start md:gap-1
-    xl:col-start-3
+    col-span-6 row-span-2  col-start-2
+    md:col-span-7 md:col-start-2 md:justify-start md:gap-1 md:row-span-1
+    xl:col-start-3 
     uppercase`}
     >
       {currentHour >= 5 && currentHour < 17 ? (
@@ -47,7 +51,10 @@ export default function GreetingComponent({ time, isExpanded }: PropTypes) {
           />
         </svg>
       )}
-      Good {greeting}<span className="hidden md:block">, It's Currently</span>
+      <div className="flex md:ml-2">
+        Good {greeting}
+        <span className="hidden md:block">, It's Currently</span>
+      </div>
     </div>
   );
 }

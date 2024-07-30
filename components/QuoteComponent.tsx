@@ -8,7 +8,7 @@ interface PropTypes {
 
 export default function QuoteComponent({ isExpanded }: PropTypes) {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getData = async () => {
     setLoading(true);
@@ -40,10 +40,19 @@ export default function QuoteComponent({ isExpanded }: PropTypes) {
       text-[12px] md:text-[18px] leading-[22px] tracking-[0px]
       "
       >
-        <div className="font-normal">
+        <motion.div
+        initial={loading?{opacity:0, x:-1000} : ''}
+        animate={!loading?{opacity:100, x:0} : ''}
+        transition={{ ease: "easeIn", duration: 0.25 }}
+
+        className="font-normal">
           &quot;{loading ? " " : data!.quote}&quot;
-        </div>
-        <div className="font-bold mt-2">{loading ? " " : data!.author}</div>
+        </motion.div>
+        <motion.div
+        initial={loading?{opacity:0}: ''}
+        animate={!loading?{opacity:100} : ''}
+        transition={{ ease: "easeIn", duration: 1 }}
+        className="font-bold mt-2">{loading ? "" : data!.author}</motion.div>
       </div>
 
       <button className="cursor-pointer flex" onClick={getData}>
