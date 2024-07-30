@@ -8,6 +8,7 @@ import InformationComponent from "./InformationComponent";
 import BackgroundImageComponent from "./BackgroudImageComponent";
 import { useState, useEffect, Suspense } from "react";
 import { fetchUserTime } from "./Actions/serverActions";
+import { motion } from "framer-motion";
 // Get user ip address using ipapi
 const fetchUserLocation = async () => {
   const res = await fetch("https://ipapi.co/json/");
@@ -45,15 +46,18 @@ export default function ClockComponent() {
     getData();
   }, []);
 
+
+
   console.log(userTimeData);
   return (
     <>
       <div className="relative ">
         {!isLoading ? (
           <div
+            
             className={`relative text-white ${
               isExpanded ? "h-[65vh]" : "h-screen"
-            } bg-black h-screen bg-opacity-50 grid grid-cols-12 grid-rows-24`}
+            } bg-black  h-screen bg-opacity-50 grid grid-cols-12 grid-rows-24`}
           >
             <BackgroundImageComponent currentTime={currentTime} />
             <QuoteComponent isExpanded={isExpanded}/>
@@ -67,14 +71,15 @@ export default function ClockComponent() {
           </div>
         ) : null}
 
-        <div className={`text-white ${isExpanded ? "h-[35vh]" : "h-0"} bg-black grid grid-cols-12 grid-rows-12`}>
+        <motion.div 
+         className={`text-white ${isExpanded ? "h-[35vh]" : "h-0"} bg-black bg-opacity-90 grid grid-cols-12 grid-rows-12`}>
           <InformationComponent
             timezone={userTimeData!.timezone}
             yearday={userTimeData!.day_of_year}
             weekday={userTimeData!.day_of_week}
             weeknumber={userTimeData!.week_number}
           />
-        </div>
+        </motion.div>
       </div>
     </>
   );
