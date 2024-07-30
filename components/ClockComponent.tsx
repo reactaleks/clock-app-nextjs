@@ -21,7 +21,7 @@ export default function ClockComponent() {
   const [userTimeData, setuserTimeData] = useState("");
   const [currentTime, setCurrentTime] = useState("");
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getData = async () => {
     setIsLoading(true);
@@ -54,9 +54,7 @@ export default function ClockComponent() {
         {!isLoading ? (
           <div
             
-            className={`relative text-white ${
-              isExpanded ? "h-[65vh] xl:h-[50vh]" : "h-screen"
-            } bg-black  h-screen bg-opacity-50 grid grid-cols-12 grid-rows-24`}
+            className={`relative text-white ${isExpanded ? "h-[65vh] xl:h-[50vh]" : "h-screen"} bg-black   bg-opacity-50 grid grid-cols-12 grid-rows-24`}
           >
             <BackgroundImageComponent currentTime={currentTime} />
             <QuoteComponent isExpanded={isExpanded}/>
@@ -71,7 +69,8 @@ export default function ClockComponent() {
         ) : null}
 
         <motion.div 
-         className={`text-white ${isExpanded ? "h-[35vh] xl:h-[50vh]" : "h-0"} bg-black bg-opacity-90 grid grid-cols-12 grid-rows-12`}>
+        
+         className={`text-white ${isExpanded ? "h-[35vh] xl:h-[50vh]" : "h-[0px]"} bg-black bg-opacity-90 grid grid-cols-12 grid-rows-12`}>
           <InformationComponent
             timezone={userTimeData!.timezone}
             yearday={userTimeData!.day_of_year}
