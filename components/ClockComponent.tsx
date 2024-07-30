@@ -1,42 +1,81 @@
+"use client";
 import GreetingComponent from "./GreetingComponent";
 import TimeComponent from "./TimeComponent";
 import LocationComponent from "./LocationComponent";
 import ButtonComponent from "./ButtonComponent";
 import QuoteComponent from "./QuoteComponent";
 import InformationComponent from "./InformationComponent";
-
+import BackgroundImageComponent from "./BackgroudImageComponent";
+import { useState, useEffect, Suspense } from "react";
+import { fetchUserTime } from "./Actions/serverActions";
 // Get user ip address using ipapi
 const fetchUserLocation = async () => {
   const res = await fetch("https://ipapi.co/json/");
   return res.json();
 };
-// Get user time using worldtimeapi
-const fetchUserTime = async (timezone: string) => {
-  const res = await fetch(`http://worldtimeapi.org/api/timezone/` + timezone);
-  return res.json();
-};
 
+export default function ClockComponent() {
+  const [city, setCity] = useState("");
+  const [countryCode, setCountryCode] = useState("");
+  const [userTimeData, setuserTimeData] = useState("");
+  const [currentTime, setCurrentTime] = useState("");
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-export default async function ClockComponent() {
-  const data = await fetchUserLocation();
-  const userTimezone = data.timezone;
-  const currentUserDateTime = await fetchUserTime(userTimezone);
-  const currentUserTime = new Date(
-    currentUserDateTime.datetime
-  ).toLocaleTimeString("en-US", {
-    hour12: false,
-    hour: "numeric",
-    minute: "2-digit",
-  });
+  const getData = async () => {
+    setIsLoading(true);
+    const data = await fetchUserLocation();
+    const userTimeData = await fetchUserTime(data.timezone);
+    const currentTime = new Date(userTimeData.datetime).toLocaleTimeString(
+      "en-US",
+      {
+        hour12: false,
+        hour: "numeric",
+        minute: "2-digit",
+      }
+    );
+    setCity(data.city);
+    setCountryCode(data.country_code);
+    setuserTimeData(userTimeData);
+    setCurrentTime(currentTime);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(userTimeData);
   return (
     <>
-        <QuoteComponent/>
-        <GreetingComponent time={currentUserTime}/>
-        <TimeComponent currentTime={currentUserTime}/>
-        <LocationComponent city={data.city} country={data.country_code}/>
-        <ButtonComponent/>
-        <InformationComponent timezone={currentUserDateTime.timezone} yearday={currentUserDateTime.day_of_year} weekday={currentUserDateTime.day_of_week} weeknumber={currentUserDateTime.week_number}/>
+      <div className="relative ">
+        {!isLoading ? (
+          <div
+            className={`relative text-white ${
+              isExpanded ? "h-[65vh]" : "h-screen"
+            } bg-black h-screen bg-opacity-50 grid grid-cols-12 grid-rows-24`}
+          >
+            <BackgroundImageComponent currentTime={currentTime} />
+            <QuoteComponent isExpanded={isExpanded}/>
+            <GreetingComponent time={currentTime} isExpanded={isExpanded}/>
+            <TimeComponent currentTime={currentTime} abbreviation={userTimeData!.abbreviation} isExpanded={isExpanded}/>
+            <LocationComponent city={city} country={countryCode} isExpanded={isExpanded}/>
+            <ButtonComponent
+              setIsExpanded={setIsExpanded}
+              isExpanded={isExpanded}
+            />
+          </div>
+        ) : null}
 
+        <div className={`text-white ${isExpanded ? "h-[35vh]" : "h-0"} bg-black grid grid-cols-12 grid-rows-12`}>
+          <InformationComponent
+            timezone={userTimeData!.timezone}
+            yearday={userTimeData!.day_of_year}
+            weekday={userTimeData!.day_of_week}
+            weeknumber={userTimeData!.week_number}
+          />
+        </div>
+      </div>
     </>
   );
 }
