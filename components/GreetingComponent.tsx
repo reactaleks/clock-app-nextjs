@@ -1,8 +1,9 @@
 interface PropTypes {
   time: string;
+  isExpanded: boolean;
 }
 
-export default function GreetingComponent({ time }: PropTypes) {
+export default function GreetingComponent({ time, isExpanded }: PropTypes) {
   const currentHour = parseInt(time.split(":")[0]);
   let greeting = "";
 
@@ -17,9 +18,11 @@ export default function GreetingComponent({ time }: PropTypes) {
   }
 
   return (
-    <div className="text-white text-[15px] leading-[25px] tracking-[3px] 
+    <div className={`text-white text-[15px] leading-[25px] tracking-[3px] 
+    
     flex justify-between items-center
-    col-span-7 row-span-1 row-start-12 col-start-2 uppercase">
+    ${isExpanded ? 'row-start-8' : 'row-start-12'}
+    col-span-7 row-span-1  col-start-2 uppercase`}>
       {currentHour >= 5 && currentHour < 17 ? (
         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
         <path

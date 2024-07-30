@@ -15,11 +15,11 @@ const fetchUserLocation = async () => {
 };
 
 export default function ClockComponent() {
-  const [city, setCity] = useState('');
-  const [countryCode, setCountryCode] = useState('')
-  const [userTimeData, setuserTimeData] = useState();
+  const [city, setCity] = useState("");
+  const [countryCode, setCountryCode] = useState("");
+  const [userTimeData, setuserTimeData] = useState("");
   const [currentTime, setCurrentTime] = useState("");
-  const [isExpanded, setIsExpanded] = useState("");
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const getData = async () => {
@@ -45,25 +45,36 @@ export default function ClockComponent() {
     getData();
   }, []);
 
-  console.log(city)
+  console.log(userTimeData);
   return (
     <>
       <div className="relative ">
         {!isLoading ? (
-          <div className="relative text-white bg-black h-screen bg-opacity-50 grid grid-cols-12 grid-rows-24">
+          <div
+            className={`relative text-white ${
+              isExpanded ? "h-[65vh]" : "h-screen"
+            } bg-black h-screen bg-opacity-50 grid grid-cols-12 grid-rows-24`}
+          >
             <BackgroundImageComponent currentTime={currentTime} />
-            <QuoteComponent />
-            <GreetingComponent time={currentTime} />
-            <TimeComponent currentTime={currentTime} />
-            <LocationComponent city={city} country={countryCode} />
-            <ButtonComponent />
+            <QuoteComponent isExpanded={isExpanded}/>
+            <GreetingComponent time={currentTime} isExpanded={isExpanded}/>
+            <TimeComponent currentTime={currentTime} abbreviation={userTimeData!.abbreviation} isExpanded={isExpanded}/>
+            <LocationComponent city={city} country={countryCode} isExpanded={isExpanded}/>
+            <ButtonComponent
+              setIsExpanded={setIsExpanded}
+              isExpanded={isExpanded}
+            />
           </div>
         ) : null}
 
-        {/* <div className="text-white absolute bottom-0">
-        <InformationComponent timezone={currentUserDateTime.timezone} yearday={currentUserDateTime.day_of_year} weekday={currentUserDateTime.day_of_week} weeknumber={currentUserDateTime.week_number}/>
-
-      </div> */}
+        <div className={`text-white ${isExpanded ? "h-[35vh]" : "h-0"} bg-black grid grid-cols-12 grid-rows-12`}>
+          <InformationComponent
+            timezone={userTimeData!.timezone}
+            yearday={userTimeData!.day_of_year}
+            weekday={userTimeData!.day_of_week}
+            weeknumber={userTimeData!.week_number}
+          />
+        </div>
       </div>
     </>
   );

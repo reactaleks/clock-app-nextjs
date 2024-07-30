@@ -1,7 +1,12 @@
 "use client";
 import { fetchProgrammingQuote } from "./Actions/serverActions";
 import { useState, useEffect } from "react";
-export default function QuoteComponent() {
+
+interface PropTypes {
+  isExpanded:boolean;
+}
+
+export default function QuoteComponent({isExpanded}:PropTypes) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -17,10 +22,10 @@ export default function QuoteComponent() {
 
   return (
     <div
-      className="text-[12px] leading-[22px]
+      className={`${isExpanded ? 'hidden' : 'relative'} text-[12px] leading-[22px]
         col-span-10 col-start-2 row-span-8 row-start-2 
         flex justify-between
-        "
+        `}
     >
       <div className="flex flex-col max-w-[90%]
       text-[12px] leading-[22px] tracking-[0px]

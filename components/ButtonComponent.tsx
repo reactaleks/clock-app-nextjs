@@ -1,32 +1,37 @@
 "use client";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { animate, motion } from "framer-motion";
 
-export default function ButtonComponent() {
+interface PropTypes {
+  isExpanded: boolean;
+  setIsExpanded: (isExpanded:boolean) => void;
+}
+
+export default function ButtonComponent({setIsExpanded, isExpanded}:PropTypes) {
   const [isActive, setisActive] = useState(false);
 
   const variants = {
     rotate: { rotate: [0, -180], type: "spring" },
     rotateback: { rotate: [-180, 0], type: "spring" },
 
-    // You can do whatever you want here, if you just want it to stop completely use `rotate: 0`
   };
 
   return (
     <button
       onClick={() => {
-        setisActive(!isActive);
+        setisActive(!isActive)
+        setIsExpanded(!isExpanded)
       }}
       className="
         text-black text-opacity-50 text-[12px] font-bold leading-[14px] tracking-[3.75px] uppercase
         rounded-full bg-white
         col-span-4 col-start-2 row-span-2 row-start-22 
         relative
-        flex items-center justify-start p-4
+        flex items-center justify-start p-5
         max-h-[39px] max-w-[115px]
         "
     >
-      More
+      {isExpanded ? 'Less' : 'More'}
       <motion.div
         layout
         variants={variants}
