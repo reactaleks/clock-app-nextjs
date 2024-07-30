@@ -15,7 +15,7 @@ export default function InformationComponent({
       <div
         className="col-span-10 col-start-2 row-start-3  uppercase text-[10px] leading-[28px] tracking-[2px] flex justify-between 
        md:text-[13px] md:col-span-5 md:col-start-2 md:flex-col md:row-span-2 md:row-start-4 md:tracking-[2.6px]
-      "
+ xl:col-start-3     "
       >
         <div>Current timezone<span className="md:hidden">:</span></div>
         <div className="text-[15px] md:text-[40px] font-bold capitalize">{timezone}</div>
@@ -23,7 +23,7 @@ export default function InformationComponent({
       <div
         className="col-span-10 col-start-2 row-start-5 uppercase text-[10px] leading-[28px] tracking-[2px] flex justify-between
              md:text-[13px] md:col-span-5 md:col-start-2 md:flex-col md:row-span-2 md:row-start-8 md:tracking-[2.6px]
-"
+xl:col-start-3" 
       >
         <div>Day of the year<span className="md:hidden">:</span></div>
         <div className="text-[15px] md:text-[40px] font-bold">{yearday}</div>

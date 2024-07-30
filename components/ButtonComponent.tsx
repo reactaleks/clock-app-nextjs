@@ -1,6 +1,6 @@
 "use client";
-import { SetStateAction, useState } from "react";
-import { animate, motion } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 interface PropTypes {
   isExpanded: boolean;
@@ -27,10 +27,9 @@ export default function ButtonComponent({setIsExpanded, isExpanded}:PropTypes) {
         text-black text-opacity-50 text-[12px] md:text-[16px] font-bold leading-[14px] tracking-[3.75px] uppercase
         rounded-full bg-white
         col-span-4 col-start-2 row-span-2 row-start-22
-        xl:col-start-10 xl:row-span-2 xl:row-start-22
         relative
         flex items-center justify-start p-5 md:px-7
-        w-[146px] h-[56px] ${isExpanded ? 'xl:row-start-19 xl:row-span-2' : ''}
+        w-[115px] h-[39px] md:w-[146px] md:h-[56px] ${isExpanded ? 'row-start-21 md:row-start-21 xl:row-start-19 xl:row-span-3 xl:col-start-10' : 'xl:col-start-10 xl:row-span-2 xl:row-start-22'}
         `}
     >
       {isExpanded ? 'Less' : 'More'}
