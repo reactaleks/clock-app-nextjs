@@ -48,7 +48,6 @@ export default function ClockComponent() {
 
 
 
-  console.log(userTimeData);
   return (
     <>
       <div className="relative ">
@@ -56,7 +55,7 @@ export default function ClockComponent() {
           <div
             
             className={`relative text-white ${
-              isExpanded ? "h-[65vh]" : "h-screen"
+              isExpanded ? "h-[65vh] xl:h-[50vh]" : "h-screen"
             } bg-black  h-screen bg-opacity-50 grid grid-cols-12 grid-rows-24`}
           >
             <BackgroundImageComponent currentTime={currentTime} />
@@ -72,7 +71,7 @@ export default function ClockComponent() {
         ) : null}
 
         <motion.div 
-         className={`text-white ${isExpanded ? "h-[35vh]" : "h-0"} bg-black bg-opacity-90 grid grid-cols-12 grid-rows-12`}>
+         className={`text-white ${isExpanded ? "h-[35vh] xl:h-[50vh]" : "h-0"} bg-black bg-opacity-90 grid grid-cols-12 grid-rows-12`}>
           <InformationComponent
             timezone={userTimeData!.timezone}
             yearday={userTimeData!.day_of_year}

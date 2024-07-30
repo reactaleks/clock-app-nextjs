@@ -23,15 +23,15 @@ export default function ButtonComponent({setIsExpanded, isExpanded}:PropTypes) {
         setisActive(!isActive)
         setIsExpanded(!isExpanded)
       }}
-      className="
+      className={`
         text-black text-opacity-50 text-[12px] md:text-[16px] font-bold leading-[14px] tracking-[3.75px] uppercase
         rounded-full bg-white
-        col-span-4 col-start-2 row-span-2 row-start-22 
+        col-span-4 col-start-2 row-span-2 row-start-22
+        xl:col-start-10 xl:row-span-2 xl:row-start-22
         relative
         flex items-center justify-start p-5 md:px-7
-        max-h-[39px] max-w-[115px]
-        md:max-w-[146px] md:max-h-[56px]
-        "
+        w-[146px] h-[56px] ${isExpanded ? 'xl:row-start-19 xl:row-span-2' : ''}
+        `}
     >
       {isExpanded ? 'Less' : 'More'}
       <motion.div

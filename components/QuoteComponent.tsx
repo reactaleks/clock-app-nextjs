@@ -31,6 +31,7 @@ export default function QuoteComponent({ isExpanded }: PropTypes) {
       } text-[12px] leading-[22px]
         col-span-10 col-start-2 row-span-8 row-start-2
         md:col-span-9 md:col-start-2 md:row-span-8 md:row-start-2 
+        xl:col-span-6 xl:col-start-2
         flex justify-between
         `}
     >
