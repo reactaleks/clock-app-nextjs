@@ -36,10 +36,26 @@ const fetchUserLocation = async () => {
 };
 
 export default function ClockComponent() {
-  const [city, setCity] = useState("");
-  const [countryCode, setCountryCode] = useState("");
-  const [userTimeData, setuserTimeData] = useState<TimeData | any>("");
-  const [currentTime, setCurrentTime] = useState("");
+  const [city, setCity] = useState<string>("");
+  const [countryCode, setCountryCode] = useState<string>("");
+  const [userTimeData, setuserTimeData] = useState<TimeData>({
+    abbreviation:'',
+    client_ip:'',
+    datetime:'',
+    day_of_week: 0,
+    day_of_year: 0,
+    dst:true,
+    dst_from:'',
+    dst_offset:0,
+    dst_until:'',
+    raw_offset:0,
+    timezone:'',
+    unixtime:0,
+    utc_datetime:'',
+    utc_offset:'',
+    week_number:0
+  });
+  const [currentTime, setCurrentTime] = useState<string>("");
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isDayTime, setIsDayTime] = useState<boolean>(false);
@@ -47,7 +63,7 @@ export default function ClockComponent() {
   const getData = async () => {
     setIsLoading(true);
     const data = await fetchUserLocation();
-    const userTimeData = await fetchUserTime(data.timezone) as TimeData;
+    const userTimeData:TimeData = await fetchUserTime(data.timezone);
     const currentTime = new Date(userTimeData.datetime).toLocaleTimeString(
       "en-US",
       {
@@ -56,6 +72,7 @@ export default function ClockComponent() {
         minute: "2-digit",
       }
     );
+
     setCity(data.city);
     setCountryCode(data.country_code);
     setuserTimeData(userTimeData);
@@ -72,6 +89,7 @@ export default function ClockComponent() {
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <>
       <div className="relative ">
@@ -106,11 +124,13 @@ export default function ClockComponent() {
 
         <motion.div
           initial={isExpanded ? { height: '40vh' } : ''}
-          animate={!isExpanded ? { height: 0 } : ''}
+          animate={!isExpanded ? { height: '0vh' } : ''}
           transition={{ ease: "easeIn", duration: 0.1 }}
-          className={` ${isExpanded ? "h-[40vh] xl:h-[50vh]" : "h-[0px]"} ${
-            isDayTime ? "bg-[#979797] text-black" : "bg-black text-white "
-          }  bg-opacity-[80%] backdrop-blur-md grid grid-cols-12 grid-rows-12`}
+          className={` 
+            ${isExpanded ? "h-[40vh] xl:h-[50vh]" : "h-[0px]"} 
+            ${isDayTime ? "bg-[#979797] text-black" : "bg-black text-white"}
+            bg-opacity-[80%] backdrop-blur-md grid grid-cols-12 grid-rows-12
+            `}
         >
           <InformationComponent
             timezone={userTimeData!.timezone}

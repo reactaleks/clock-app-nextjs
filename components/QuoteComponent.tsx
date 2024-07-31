@@ -2,18 +2,23 @@
 import { fetchProgrammingQuote } from "./Actions/serverActions";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+
 interface PropTypes {
   isExpanded: boolean;
 }
 
+interface QuoteData {
+  quote: string;
+  author: string;
+}
+
 export default function QuoteComponent({ isExpanded }: PropTypes) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<QuoteData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const getData = async () => {
-    setLoading(true);
     const quoteData = await fetchProgrammingQuote();
-    setLoading(false);
+    setLoading(!loading);
     return setData(quoteData);
   };
 
@@ -22,8 +27,9 @@ export default function QuoteComponent({ isExpanded }: PropTypes) {
   }, []);
 
   const variants = {
-    rotate: { rotate: [0, -360], type: "spring" },
+    rotate: { rotate: [-360] },
   };
+
   return (
     <div
       className={`${
@@ -41,22 +47,26 @@ export default function QuoteComponent({ isExpanded }: PropTypes) {
       "
       >
         <motion.div
-        initial={loading?{opacity:0, x:-1000} : ''}
-        animate={!loading?{opacity:100, x:0} : ''}
-        transition={{ ease: "easeIn", duration: 0.25 }}
-
-        className="font-normal">
+          initial={loading ? { opacity: 0, x: -1000 } : ""}
+          animate={!loading ? { opacity: 100, x: 0 } : ""}
+          transition={{ ease: "easeIn", duration: 0.25 }}
+          className="font-normal"
+        >
           &quot;{loading ? " " : data!.quote}&quot;
         </motion.div>
         <motion.div
-        initial={loading?{opacity:0}: ''}
-        animate={!loading?{opacity:100} : ''}
-        transition={{ ease: "easeIn", duration: 1 }}
-        className="font-bold mt-2">{loading ? "" : data!.author}</motion.div>
+          initial={loading ? { opacity: 0 } : ""}
+          animate={!loading ? { opacity: 100 } : ""}
+          transition={{ ease: "easeIn", duration: 1 }}
+          className="font-bold mt-2"
+        >
+          {loading ? "" : data!.author}
+        </motion.div>
       </div>
 
       <button className="cursor-pointer flex" onClick={getData}>
         <motion.div
+          initial={{ rotate: 0 }}
           variants={variants}
           animate={loading ? "rotate" : ""}
         >

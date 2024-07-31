@@ -7,12 +7,6 @@ export async function fetchProgrammingQuote() {
     return res.json();
 };
 
-// // Get user ip address using ipapi
-// export async function fetchUserLocation() {
-//   const res = await fetch("https://ipapi.co/json/");
-//   return res.json();
-// };
-
 // Get user time using worldtimeapi
 export async function fetchUserTime(timezone: string) {
   const res = await fetch((`http://worldtimeapi.org/api/timezone/` + timezone), {next: { revalidate: 60 }});
