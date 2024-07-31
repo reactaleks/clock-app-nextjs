@@ -14,14 +14,13 @@ export default function ButtonComponent({
   const [isActive, setisActive] = useState(false);
 
   const variants = {
-    rotate: { rotate: [0, -180], type: "spring" },
-    rotateback: { rotate: [-180, 0], type: "spring" },
+    rotate: { rotate: [-180] },
   };
 
   return (
     <motion.button
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.9 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
       onClick={() => {
         setisActive(!isActive);
         setIsExpanded(!isExpanded);
@@ -43,7 +42,8 @@ export default function ButtonComponent({
       {isExpanded ? "Less" : "More"}
       <motion.div
         variants={variants}
-        animate={isActive ? "rotate" : "rotateback"}
+        animate={isActive ? "rotate" : ""}
+        style={{x:0}}
         className="bg-[#303030] group-hover:bg-[#999999] w-[32px] md:w-[40px] md:h-[40px] h-[32px] flex items-center top-0 bottom-0 my-auto right-1 md:right-2 rounded-full justify-center absolute"
       >
         <svg width="14" height="9" xmlns="http://www.w3.org/2000/svg">
