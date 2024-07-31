@@ -29,8 +29,8 @@ export default function GreetingComponent({ time, isExpanded }: PropTypes) {
         : "row-start-14 md:row-start-13 xl:row-start-15"
     }
 
-    col-span-6 row-span-2  col-start-2
-    md:col-span-7 md:col-start-2 md:justify-start md:gap-1 md:row-span-1
+    col-span-7 row-span-2  col-start-2
+    md:col-span-8 md:col-start-2 md:justify-start md:gap-1 md:row-span-1
     xl:col-start-3 
     uppercase`}
     >

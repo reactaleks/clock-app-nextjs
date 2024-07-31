@@ -17,8 +17,9 @@ export default function QuoteComponent({ isExpanded }: PropTypes) {
   const [loading, setLoading] = useState<boolean>(true);
 
   const getData = async () => {
+    setLoading(true);
     const quoteData = await fetchProgrammingQuote();
-    setLoading(!loading);
+    setLoading(false);
     return setData(quoteData);
   };
 
