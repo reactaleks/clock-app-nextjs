@@ -59,7 +59,7 @@ export default function GreetingComponent({ time, isExpanded }: PropTypes) {
         md:text-[18px] xl:text-[20px] xl:leading-[28px] xl:tracking-[4px]"
       >
         Good {greeting}
-        <span className="hidden md:block">, It's Currently</span>
+        <span className="hidden md:block">, It&apos;s Currently</span>
       </div>
     </motion.div>
   );
