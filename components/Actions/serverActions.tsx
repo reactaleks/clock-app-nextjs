@@ -9,6 +9,6 @@ export async function fetchProgrammingQuote() {
 
 // Get user time using worldtimeapi
 export async function fetchUserTime(timezone: string) {
-  const res = await fetch((`http://worldtimeapi.org/api/timezone/` + timezone), {next: { revalidate: 60 }});
+  const res = await fetch((`http://worldtimeapi.org/api/timezone/` + timezone));
   return res.json();
 };
