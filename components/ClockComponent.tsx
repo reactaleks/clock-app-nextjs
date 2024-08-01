@@ -102,7 +102,7 @@ export default function ClockComponent() {
         initial={isExpanded ? { height: "60vh" } : ""}
         animate={!isExpanded ? { height: "100vh" } : ""}
         transition={{ ease: "easeIn", duration: 0.1 }}
-        className={`relative text-white ${
+        className={`text-white ${
           isExpanded ? "h-[60vh] xl:h-[50vh]" : "h-screen"
         } bg-black   bg-opacity-50 grid grid-cols-12 grid-rows-24`}
       >
