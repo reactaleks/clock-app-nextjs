@@ -19,8 +19,9 @@ export default function QuoteComponent({ isExpanded }: PropTypes) {
   const getData = async () => {
     setLoading(true);
     const quoteData = await fetchProgrammingQuote();
+
     setLoading(false);
-    return setData(quoteData);
+    setData(quoteData);
   };
 
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function QuoteComponent({ isExpanded }: PropTypes) {
 
       <button className="cursor-pointer flex" onClick={getData}>
         <motion.div
-          initial={{ rotate: 0, opacity:0 }}
+          initial={{ rotate: 0 }}
           variants={variants}
           animate={loading ? "rotate" : ""}
         >

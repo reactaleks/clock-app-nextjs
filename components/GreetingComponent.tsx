@@ -22,7 +22,7 @@ export default function GreetingComponent({ time, isExpanded, isLoading }: PropT
     <motion.div
       initial={{opacity:0, x: 1000}}
       animate={{opacity:100, x: 0}}
-      transition={{duration:1.5}}
+      transition={{duration:1.5, delay:1}}
       className={`
     flex justify-between items-center
 
