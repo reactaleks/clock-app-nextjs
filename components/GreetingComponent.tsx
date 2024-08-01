@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 interface PropTypes {
   time: string;
   isExpanded: boolean;
@@ -18,7 +19,10 @@ export default function GreetingComponent({ time, isExpanded }: PropTypes) {
   }
 
   return (
-    <div
+    <motion.div
+      initial={{opacity:0, x: 1000}}
+      animate={{opacity:100, x: 0}}
+      transition={{duration:1.5}}
       className={`
     flex justify-between items-center
 
@@ -50,11 +54,13 @@ export default function GreetingComponent({ time, isExpanded }: PropTypes) {
           />
         </svg>
       )}
-      <div className="flex md:ml-2 text-white text-[15px] leading-[25px] tracking-[3px] 
-        md:text-[18px] xl:text-[20px] xl:leading-[28px] xl:tracking-[4px]">
+      <div
+        className="flex md:ml-2 text-white text-[15px] leading-[25px] tracking-[3px] 
+        md:text-[18px] xl:text-[20px] xl:leading-[28px] xl:tracking-[4px]"
+      >
         Good {greeting}
         <span className="hidden md:block">, It's Currently</span>
       </div>
-    </div>
+    </motion.div>
   );
 }

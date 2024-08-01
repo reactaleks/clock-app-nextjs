@@ -50,7 +50,7 @@ export default function QuoteComponent({ isExpanded }: PropTypes) {
         <motion.div
           initial={loading ? { opacity: 0, x: -1000 } : ""}
           animate={!loading ? { opacity: 100, x: 0 } : ""}
-          transition={{ ease: "easeIn", duration: 0.25 }}
+          transition={{ ease: "easeIn", duration: 0.5 }}
           className="font-normal"
         >
           &quot;{loading ? " " : data!.quote}&quot;

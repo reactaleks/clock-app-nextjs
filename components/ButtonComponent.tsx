@@ -22,6 +22,9 @@ export default function ButtonComponent({
     <motion.button
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
+      initial={{opacity:0}}
+      animate={{opacity:100}}
+      transition={{duration:2}}
       onClick={() => {
         setisActive(!isActive);
         setIsExpanded(!isExpanded);
