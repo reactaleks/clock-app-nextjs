@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 interface PropTypes {
   currentTime: string;
   abbreviation: string;
@@ -22,10 +23,11 @@ export default function TimeComponent({
          col-start-2 
         justify-between xl:col-span-4 xl:justify-start`}
     >
-      <div className="text-[100px] md:text-[175px] font-bold tracking-[-2.5px] xl:text-[200px] xl:tracking-[-5px]  ">{currentTime}</div>
-      <div className="text-[15px] md:text-[32px] font-light flex flex-col h-[100%] justify-end opacity-75">
+      <motion.div initial={{x:-1000, opacity:0}} animate={{x:0, opacity:100}} transition={{duration:2}}
+ className="text-[100px] md:text-[175px] font-bold tracking-[-2.5px] xl:text-[200px] xl:tracking-[-5px]  ">{currentTime}</motion.div>
+      <motion.div initial={{opacity:0}} animate={{opacity:100}} transition={{duration:3}} className="text-[15px] md:text-[32px] font-light flex flex-col h-[100%] justify-end opacity-75">
         {abbreviation}
-      </div>
+      </motion.div>
     </div>
   );
 }
