@@ -1,21 +1,29 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 interface PropTypes {
-  isDayTime: boolean;
-  isLoading: boolean;
+  isDayTime: boolean | null;
+  isLoading: boolean | null;
 }
 
 export default function BackgroundImageComponent({
   isDayTime,
   isLoading,
 }: PropTypes) {
+  if(isDayTime == null) {
+    return (
+      <motion.div initial={{opacity:0, zIndex:-10}} transition={{duration:1}} className="h-screen w-screen absolute bg-black">
+
+      </motion.div>
+    )
+  } else {
   if (isDayTime) {
     return (
       <motion.div
         className=""
         initial={{opacity: 0, zIndex: -10 }}
-        animate={isLoading ? {opacity:0} : { opacity: 100 }}
-        transition={{ duration: 5 }}
+        animate={{opacity: 100}}
+        exit={{opacity:0}}
+        transition={{ duration: 1 }}
       >
         <Image
           src={"/assets/desktop/bg-image-daytime.jpg"}
@@ -33,8 +41,9 @@ export default function BackgroundImageComponent({
       <motion.div
         className=""
         initial={{ opacity: 0, zIndex: -10 }}
-        animate={isLoading ? {opacity:0} : { opacity: 100 }}
-        transition={{ duration: 5 }}
+        animate={{ opacity: 100 }}
+        exit={{opacity:0}}
+        transition={{ duration: 1 }}
       >
         <Image
           src={"/assets/desktop/bg-image-nighttime.jpg"}
@@ -47,5 +56,7 @@ export default function BackgroundImageComponent({
         />
       </motion.div>
     );
-  } 
+  }
+  }
+ 
 }

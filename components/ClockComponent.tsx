@@ -57,8 +57,8 @@ export default function ClockComponent() {
   const [currentTimeZone, setCurrentTimeZone] = useState<string>("");
   const [currentTime, setCurrentTime] = useState<string>("");
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(Boolean);
-  const [isDayTime, setIsDayTime] = useState<boolean>(Boolean);
+  const [isLoading, setIsLoading] = useState<boolean | null>(null);
+  const [isDayTime, setIsDayTime] = useState<boolean | null>(null);
 
   const getData = async () => {
     setIsLoading(true);
@@ -109,7 +109,7 @@ export default function ClockComponent() {
         <BackgroundImageComponent isDayTime={isDayTime} isLoading={isLoading} />
 
         <QuoteComponent isExpanded={isExpanded} />
-        <GreetingComponent time={currentTime} isExpanded={isExpanded} />
+        <GreetingComponent time={currentTime} isExpanded={isExpanded} isLoading={isLoading}/>
           <TimeComponent
             currentTime={currentTime}
             abbreviation={userTimeData!.abbreviation}
