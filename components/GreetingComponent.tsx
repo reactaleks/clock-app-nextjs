@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 interface PropTypes {
   time: string;
   isExpanded: boolean;
+  isLoading: boolean | null;
 }
 
-export default function GreetingComponent({ time, isExpanded }: PropTypes) {
+export default function GreetingComponent({ time, isExpanded, isLoading }: PropTypes) {
   const currentHour = parseInt(time.split(":")[0]);
   let greeting = "";
-
   if (currentHour > 5 && currentHour < 12) {
     greeting = "Morning";
   } else if (currentHour >= 12 && currentHour < 17) {
@@ -63,4 +63,5 @@ export default function GreetingComponent({ time, isExpanded }: PropTypes) {
       </div>
     </motion.div>
   );
+
 }
