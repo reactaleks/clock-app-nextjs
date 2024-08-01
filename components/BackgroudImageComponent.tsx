@@ -1,8 +1,14 @@
 import Image from "next/image";
+
 interface PropTypes {
   isDayTime: boolean;
+  isLoading: boolean;
 }
-export default function BackgroundImageComponent({ isDayTime }: PropTypes) {
+
+export default function BackgroundImageComponent({
+  isDayTime,
+  isLoading,
+}: PropTypes) {
   if (isDayTime) {
     return (
       <Image
@@ -15,7 +21,7 @@ export default function BackgroundImageComponent({ isDayTime }: PropTypes) {
         priority
       />
     );
-  } else {
+  } else if (!isDayTime) {
     return (
       <Image
         src={"/assets/desktop/bg-image-nighttime.jpg"}
@@ -26,6 +32,6 @@ export default function BackgroundImageComponent({ isDayTime }: PropTypes) {
         className="absolute h-full w-full -z-10"
         priority
       />
-    );
+    )
   }
 }

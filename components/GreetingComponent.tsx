@@ -19,18 +19,17 @@ export default function GreetingComponent({ time, isExpanded }: PropTypes) {
 
   return (
     <div
-      className={`text-white text-[15px] leading-[25px] tracking-[3px] 
-        md:text-[18px] xl:text-[20px] xl:leading-[28px] xl:tracking-[4px]
+      className={`
     flex justify-between items-center
 
     ${
       isExpanded
-        ? "row-start-8 md:row-start-6 xl:row-start-6"
-        : "row-start-14 md:row-start-13 xl:row-start-15"
+        ? "row-start-7 md:row-start-6 xl:row-start-7"
+        : "row-start-13 md:row-start-13 xl:row-start-15"
     }
 
-    col-span-6 row-span-2  col-start-2
-    md:col-span-7 md:col-start-2 md:justify-start md:gap-1 md:row-span-1
+    col-span-7 row-span-2  col-start-2
+    md:col-span-8 md:col-start-2 md:justify-start md:gap-1 md:row-span-1
     xl:col-start-3 
     uppercase`}
     >
@@ -51,7 +50,8 @@ export default function GreetingComponent({ time, isExpanded }: PropTypes) {
           />
         </svg>
       )}
-      <div className="flex md:ml-2">
+      <div className="flex md:ml-2 text-white text-[15px] leading-[25px] tracking-[3px] 
+        md:text-[18px] xl:text-[20px] xl:leading-[28px] xl:tracking-[4px]">
         Good {greeting}
         <span className="hidden md:block">, It's Currently</span>
       </div>
