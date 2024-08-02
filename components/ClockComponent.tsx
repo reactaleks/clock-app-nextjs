@@ -65,32 +65,41 @@ export default function ClockComponent() {
     const data = await fetchUserLocation();
     setCity(data.city);
     setCountryCode(data.country_code);
-    setCurrentTimeZone(data.timezone);  
+    setCurrentTimeZone(data.timezone);
     setIsLoading(false);
-    getTime(data.timezone)
+    getTime(data.timezone);
   };
 
-  const getTime = async (timezone:string) => {
-    const userTimeData: TimeData = await fetchUserTime(timezone);    
-    const currentTime = new Date(userTimeData.datetime).toLocaleTimeString(
-      "en-US",
-      {
-        hour12: false,
-        hour: "numeric",
-        minute: "2-digit",
+  const getTime = async (timezone: string) => {
+    if (timezone != "") {
+      const userTimeData: TimeData = await fetchUserTime(timezone);
+      if (userTimeData !== undefined) {
+        const currentTime = new Date(userTimeData.datetime).toLocaleTimeString(
+          "en-US",
+          {
+            hour12: false,
+            hour: "numeric",
+            minute: "2-digit",
+          }
+        );
+        setuserTimeData(userTimeData);
+        setCurrentTime(currentTime);
+        
+      if (
+        parseInt(currentTime.split(":")[0]) >= 5 &&
+        parseInt(currentTime.split(":")[0]) < 17
+      ) {
+        setIsDayTime(true);
+      } else {
+        setIsDayTime(false);
       }
-    );
-
-    if (
-      parseInt(currentTime.split(":")[0]) >= 5 &&
-      parseInt(currentTime.split(":")[0]) < 17
-    ) {
-      setIsDayTime(!isDayTime);
+      }
     }
+  };
 
-    setuserTimeData(userTimeData);
-    setCurrentTime(currentTime);
-  }
+  setInterval(() => {
+    getTime(currentTimeZone);
+  }, 60000);
 
   useEffect(() => {
     getData();
@@ -109,17 +118,21 @@ export default function ClockComponent() {
         <BackgroundImageComponent isDayTime={isDayTime} isLoading={isLoading} />
 
         <QuoteComponent isExpanded={isExpanded} />
-        <GreetingComponent time={currentTime} isExpanded={isExpanded} isLoading={isLoading}/>
-          <TimeComponent
-            currentTime={currentTime}
-            abbreviation={userTimeData!.abbreviation}
-            isExpanded={isExpanded}
-          />
-          <LocationComponent
-            city={city}
-            country={countryCode}
-            isExpanded={isExpanded}
-          />
+        <GreetingComponent
+          time={currentTime}
+          isExpanded={isExpanded}
+          isLoading={isLoading}
+        />
+        <TimeComponent
+          currentTime={currentTime}
+          abbreviation={userTimeData!.abbreviation}
+          isExpanded={isExpanded}
+        />
+        <LocationComponent
+          city={city}
+          country={countryCode}
+          isExpanded={isExpanded}
+        />
 
         <ButtonComponent
           setIsExpanded={setIsExpanded}
